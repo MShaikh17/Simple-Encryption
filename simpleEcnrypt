@@ -1,0 +1,34 @@
+alphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", " "]
+
+runagain = "y"
+
+def encrypt_decrypt(encrypt, phrase, newkeyword):
+        newkeyword = keyword * ((len(phrase)//len(keyword)) + 1)
+        processed = ""
+        for count in range(len(phrase)):
+          letter1 = phrase[count]
+          position1 = alphabet.index(letter1)
+          letter2 = newkeyword[count]
+          position2 = alphabet.index(letter2)
+          if encrypt == "e":
+            newposition = position1 + position2
+            if newposition >= len(alphabet):
+              newposition -= len(alphabet)
+          else:
+            newposition = position1 - position2
+            if newposition < 0:
+              newposition += len(alphabet)
+          processed += alphabet[newposition]
+        return (processed)
+
+
+print("Welcome to the keyword cipher!")
+while runagain =="y":
+    encrypt = input("Do you want to encrypt (e) or decrypt (d): ").lower()
+    phrase = input("Please enter the phrase that you want to encrypt/decrypt: ").lower()
+    keyword = input("Please enter the keyword for encryption/decryption: ").lower()                    
+    processed = encrypt_decrypt(encrypt, phrase, keyword)
+    print("Your message is: ", processed)
+    runagain = input("Do you want to encrypt/decrypt another message (y or n): ").lower()
+        
+print("Thanks for running the program!") 
